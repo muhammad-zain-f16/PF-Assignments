@@ -1,19 +1,32 @@
 #include <iostream>
 using namespace std;
 
-int char_to_int(char x);
 float number(char [], int &sindex); // this function will make numbers from the evaluate string
 float mult_divide(char [], int &index);
+float process_parenthesis(char [], int &index);
+
 
 int main()
 {
 
     // user input expression 
-    char eval_string[500] ;
-    cout << "Enter expression to evaluate: ";
-    cin >> eval_string;
-    
-    float ans = 0; // Final answer will be stored here
+      char str[50];
+       cout << "Enter expression to evaluate: ";
+      cin.getline( str, 50);
+      
+      char eval_string[50];
+      int j = 0;
+      for (int i = 0; str[i] != '\0'; i++)
+      {
+        if (str[i] != ' ' && str[i] != '"')
+        {
+          eval_string[j] = str[i];
+          j++;
+          
+        }
+      }
+      eval_string[j] = '\0';
+    float ans = 0; 
     for (int i =0;  eval_string[i] != '\0';)
     {
       if (eval_string[i] == '-')
@@ -24,21 +37,16 @@ int main()
       {
         ans += mult_divide(eval_string, ++i);
       }
+      
       else 
       {
         ans += mult_divide(eval_string, i);
       }
     
     }
-    cout << "Answer = " << ans <<endl;
+    cout << "Answer = "<< ans <<endl;
 
     return 0;
-}
-
-// This function will convert char digits to number
-int char_to_int(char x)
-{
-   return x - '0';
 }
 
 // this function will make the number from character like if 120 are three characters '1','2','0' then this function will return a number 120
@@ -47,19 +55,26 @@ float number( char str[], int &index)
   float n= 0;
   while (str[index] >= '0' && str[index] <= '9')
   {
-    n = n* 10 + char_to_int(str[index]);
+    n = n* 10 + str[index] - '0';
     index++;
   }
+  if (str[index] == '(')
+    { 
+        n = process_parenthesis( str, ++index);
+        index++;
+    }
   return n;
 }
 
-// This function will perform the calculation for multiplication and divsion and return the answer
+// This function will perform the calculation for multiplication and division and return the answer
 float mult_divide(char num[], int &index)
 {
-    float temp = number(num, index); // this will hold the first the number
-    while (num[index] != '\0' && num[index] != '+' && num[index] != '-')
+    float temp =number(num, index); 
+   
+    while (num[index] != '\0' && num[index] != '+' && num[index] != '-' && num[index] != ')' )
     {
-      if ( num[index] == '*')
+        
+     if ( num[index] == '*')
       {
         temp *= number (num, ++index);
       }
@@ -69,4 +84,26 @@ float mult_divide(char num[], int &index)
       }
     }
   return temp;
+}
+
+float process_parenthesis(char num [], int &index)
+{
+  int temp_ans = 0;
+    
+    while ( num [index] != ')')
+    {
+      if (num[index] == '-')
+      {
+        temp_ans -= mult_divide(num, ++index);
+      }
+      else if (num[index] == '+')
+      {
+        temp_ans += mult_divide(num, ++index);
+      }
+      else 
+      {
+        temp_ans += mult_divide(num, index);
+      }
+    }
+    return temp_ans;
 }

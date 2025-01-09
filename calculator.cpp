@@ -1,6 +1,7 @@
 #include <iostream>
 using namespace std;
 
+int char_to_int(char x);
 
 int main()
 {
@@ -13,3 +14,10 @@ int main()
 
     return 0;
 }
+
+// This function will convert char digits to number
+int char_to_int(char x)
+{
+   return x - '0';
+}
+

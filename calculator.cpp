@@ -8,13 +8,12 @@ float process_parenthesis(char [], int &index);
 
 int main()
 {
-
     // user input expression 
-      char str[50];
+      char str[60];
        cout << "Enter expression to evaluate: ";
-      cin.getline( str, 50);
+      cin.getline( str, 60);
       
-      char eval_string[50];
+      char eval_string[60];
       int j = 0;
       for (int i = 0; str[i] != '\0'; i++)
       {
@@ -73,7 +72,6 @@ float mult_divide(char num[], int &index)
    
     while (num[index] != '\0' && num[index] != '+' && num[index] != '-' && num[index] != ')' )
     {
-        
      if ( num[index] == '*')
       {
         temp *= number (num, ++index);

@@ -7,6 +7,5 @@ int main()
     cout << "Enter number to convert into words: ";
     cin >> num;
     cout << "Number in words = "; 
-  
   return 0;
 }

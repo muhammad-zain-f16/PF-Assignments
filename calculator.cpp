@@ -52,9 +52,24 @@ int main()
 float number( char str[], int &index)
 {
   float n= 0;
-  while (str[index] >= '0' && str[index] <= '9')
+  bool decimal_point = false;
+  float decimal = 10;
+  while ( str[index] == '.' ||str[index] >= '0' && str[index] <= '9')
   {
+    if (str[index] == '.')
+    {
+      decimal_point = true;
+    }
+
+    else if (decimal_point)
+    {
+      n += (str[index] - '0')/decimal;
+      decimal *= 10;
+    }
+    else
+    {
     n = n* 10 + str[index] - '0';
+    }
     index++;
   }
   if (str[index] == '(')
@@ -86,7 +101,7 @@ float mult_divide(char num[], int &index)
 
 float process_parenthesis(char num [], int &index)
 {
-  int temp_ans = 0;
+  float temp_ans = 0;
     
     while ( num [index] != ')')
     {

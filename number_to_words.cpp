@@ -2,17 +2,30 @@
 using namespace std;
 
 // 1 to 19 2d array
-const char one_to_nineteen[][10] = 
+const char one_to_nineteen[][12] = 
 {
-  "","One", "Two", "Three", "Four", "Five", "Six",
-  "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve",
-  "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen",
-  "Eighteen", "Nineteen"
+  "","One ", "Two ", "Three ", "Four ", "Five ", "Six ",
+  "Seven ", "Eight ", "Nine ", "Ten ", "Eleven ", "Twelve ",
+  "Thirteen ", "Fourteen ", "Fifteen ", "Sixteen ", "Seventeen ",
+  "Eighteen ", "Nineteen "
 };
 
+const char teen_num[][10] = 
+{
+  "","","Twenty ", "Thirty ","Fourty ",
+  "Fifty ", "Sixty ", "Seventy ","Eighty ",
+  "Ninety "
+};
+
+
+
+
+// Functions prototype
 int input_num(string input);
 
 void num_to_words(int);
+
+void show_one_19(int num);
 
 int main()
 {
@@ -64,12 +77,33 @@ int input_num(string a)
 }
 void num_to_words(int num)
 {
-  if (num > 20)
+  int index = 0;
+  if (num >= 100)
   {
+    index = num / 100;
+    show_one_19(index);
+    cout << "Hundred ";
+    num = num % 100;
 
   }
-  else
+  if (num >= 20)
   {
-    cout << one_to_nineteen[num] << endl;
+    index = num / 10;
+    cout << teen_num[index];
+    num = num % 10;
+  }
+  if (num > 0)
+  {
+    show_one_19(num);
+  }
+  
+  cout << endl;
+}
+
+void show_one_19(int num)
+{
+  if (num > 0)
+  {
+    cout << one_to_nineteen[num];
   }
 }

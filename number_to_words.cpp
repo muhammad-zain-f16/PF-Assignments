@@ -1,7 +1,18 @@
 #include <iostream>
 using namespace std;
 
+// 1 to 19 2d array
+const char one_to_nineteen[][10] = 
+{
+  "","One", "Two", "Three", "Four", "Five", "Six",
+  "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve",
+  "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen",
+  "Eighteen", "Nineteen"
+};
+
 int input_num(string input);
+
+void num_to_words(int);
 
 int main()
 {
@@ -10,6 +21,7 @@ int main()
   getline(cin, user_input);
   
   int num = input_num(user_input);
+  //Check user input
   while (num <= 0)
   {
     cout << "Please enter a cheque amount that is bigger than zero: ";
@@ -17,7 +29,8 @@ int main()
     num = input_num(user_input);
   }
 
-  cout << "Number = " << num << endl; 
+  cout << "Number to words = ";
+  num_to_words(num); 
   
   return 0;
 }
@@ -48,4 +61,15 @@ int input_num(string a)
       
   }
   return input;
+}
+void num_to_words(int num)
+{
+  if (num > 20)
+  {
+
+  }
+  else
+  {
+    cout << one_to_nineteen[num] << endl;
+  }
 }

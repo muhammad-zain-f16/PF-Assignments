@@ -78,6 +78,14 @@ int input_num(string a)
 void num_to_words(int num)
 {
   int index = 0;
+  if (num >= 1000)
+  {
+    index = num / 1000;
+    show_one_19(index);
+    cout << "Thousand ";
+    num = num % 1000;
+
+  }
   if (num >= 100)
   {
     index = num / 100;
